@@ -137,7 +137,10 @@ class OrderViewSet(mixins.ListModelMixin,
     pagination_class = OrderPagination
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        user = self.request.user
+        if not user or not user.is_authenticated:
+            return Order.objects.none()
+        return Order.objects.filter(user=user)
 
     def get_serializer_class(self):
         if self.action == "list":
