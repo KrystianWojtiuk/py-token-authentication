@@ -12,10 +12,9 @@ class IsAdminOrIfAuthenticatedReadOnly(permissions.BasePermission):
             return True
 
         if not user or not user.is_authenticated:
-            return request.method in permissions.SAFE_METHODS
+            return False
 
         if isinstance(view, OrderViewSet):
-            return (request.method in permissions.SAFE_METHODS
-                    or request.method == "POST")
+            return request.method in permissions.SAFE_METHODS or request.method == "POST"
 
         return request.method in permissions.SAFE_METHODS
