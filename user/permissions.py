@@ -1,7 +1,5 @@
 from rest_framework import permissions
 
-from cinema.views import OrderViewSet
-
 
 class IsAdminOrIfAuthenticatedReadOnly(permissions.BasePermission):
 
@@ -14,7 +12,7 @@ class IsAdminOrIfAuthenticatedReadOnly(permissions.BasePermission):
         if not user or not user.is_authenticated:
             return False
 
-        if isinstance(view, OrderViewSet):
+        if view.__class__.__name__ == "OrderViewSet":
             return request.method in permissions.SAFE_METHODS or request.method == "POST"
 
         return request.method in permissions.SAFE_METHODS
