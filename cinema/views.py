@@ -36,8 +36,8 @@ class ActorViewSet(mixins.ListModelMixin,
 
 
 class CinemaHallViewSet(mixins.ListModelMixin,
-                   mixins.CreateModelMixin,
-                   viewsets.GenericViewSet):
+                        mixins.CreateModelMixin,
+                        viewsets.GenericViewSet):
     queryset = CinemaHall.objects.all()
     serializer_class = CinemaHallSerializer
 

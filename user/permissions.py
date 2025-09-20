@@ -13,6 +13,7 @@ class IsAdminOrIfAuthenticatedReadOnly(permissions.BasePermission):
             return False
 
         if view.__class__.__name__ == "OrderViewSet":
-            return request.method in permissions.SAFE_METHODS or request.method == "POST"
+            return (request.method in permissions.SAFE_METHODS
+                    or request.method == "POST")
 
         return request.method in permissions.SAFE_METHODS
